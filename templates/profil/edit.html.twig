@@ -1,0 +1,26 @@
+{% extends 'mybase.html.twig' %}
+
+{% block body %}
+
+
+<div class="container">
+
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+      
+           <h1>Edit profile</h1>
+          {{ form_start(form) }}
+          {{form_row(form.phone,{'attr':{'placeholder':"Your Phone"}})}}
+          {{form_row(form.adresse,{'attr':{'placeholder':"Your adresse"}})}}
+          {{form_row(form.picture,{'attr':{'placeholder':"Your Url picture"}})}}
+          <div class="col-md-auto">
+          <button type="submit" class="btn btn-success">
+              Save
+           </button>
+           </div>
+           {{ form_end(form) }}
+
+          </div>
+          </div>
+
+{% endblock %}

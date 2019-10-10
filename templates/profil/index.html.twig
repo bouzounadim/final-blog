@@ -1,0 +1,108 @@
+{% extends 'mybase.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+<div class="container-fluid" style="  height: 800px; ">
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card" style="    width: 288px;
+
+      margin-left: 274px;
+      margin-top: 35px;
+      border-radius: 32px;
+      border: solid 1px;
+">
+        <div class="card-body">
+          <h5 class="card-title">Your name: <br> <br>  <strong>{{app.user.username}}</strong> </h5>
+          <p class="card-text"><img src="{{pro.picture | default('https://image.ibb.co/jw55Ex/def_face.jpg') }}" alt="" style="height: 100px;  border-radius: 105px;"> 
+        </p>
+        <p>Adresse : {{pro.adresse | default('you dont have adresse yet')  }}</p>
+        <p>Phone : {{pro.phone | default('you dont have adreese yet')  }} </p>
+          <a href="{{path('profil_edit')}}" class="btn btn-primary" style="    margin-left: 8px;
+          ">Edit information <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card" style="   width: 393px;
+      height: 122px;
+      margin-top: 124px;
+      border-radius: 32px;
+      border: solid 1px;
+      ">
+        <div class="card-body">
+
+                <div class="row justify-content-md-center">
+                        <div class="col col-lg-4" style="    color: purple">
+                          <h1>{{comm |length}} <i class="fa fa-comment" aria-hidden="true"></i>
+                          </h1>
+                          <h5> <span style=" font-size: 15px;"
+                            >Comment</span>
+                          </h5>
+                        </div>
+                        <div class="col col-lg-4" style="    color: #007bff;">
+                                <h1> <span> {{arti | length}} </span> <i class="fa fa-file" aria-hidden="true"></i>
+                                </h1>  
+                                <h5> <span style=" font-size: 15px;"
+                                    >   Article</span>
+                                  </h5>                  
+                                      </div>
+        </div>
+
+       
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+<table class="table " style=" margin-top: 35px; width: 800px ;   border: solid 1px;  margin-left: 170px; background-color: white;    border-radius: 17px;
+
+">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Article title</th>
+        <th scope="col">Number of comments </th>
+        <th scope="col">Category </th>
+        <th scope="col">Created At </th>
+        <th scope="col">Actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+            {% for art in arti %}
+      <tr>
+         
+        <th scope="row"></th>
+        <td>{{art.title}}</td>
+       
+        <td>{{art.comments | length}}</td>
+        <td>{{art.category.title}}</td>
+        <td>{{art.createdAt | date ('d/m/y') }}</td>
+
+        <td>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <a class="btn btn-default" href="{{path('articleedit',{'id':art.id})}}"aria-label="Settings" style="background-color: #088808;
+                    color: white;">
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                      </a>
+                      
+                      <a class="btn btn-danger" href="{{path('articledelete',{'id':art.id})}}" aria-label="Delete">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                      </a>
+                      
+                      <a class="btn btn-primary" href="{{path('articleval',{'id':art.id})}}" aria-label="Skip to main navigation">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                      </a>
+            </div></td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}

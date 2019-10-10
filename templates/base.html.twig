@@ -2,11 +2,124 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Welcome to my blog!{% endblock %}</title>
+        <script src="https://use.fontawesome.com/abde185aad.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" >
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Raleway:600,600italic,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        
         {% block stylesheets %}{% endblock %}
+<style>
+.lnr{
+  font-size: 145px;
+    color: rebeccapurple;
+}
+
+</style>
     </head>
-    <body>
+    <body style="font-family: 'Raleway', sans-serif;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="{{path('home')}}">MyBlog <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
+  </a>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav  ml-auto">
+      <li class="nav-item ">
+        <a class="nav-link" href="{{path('home')}}"style="    color: white">Home <i class="fa fa-home fa-lg" aria-hidden="true"></i></a>
+      </li>
+      {% if not app.user %}
+      <li class="nav-item ">
+          <a class="nav-link" href="{{path('secure_login')}}" style="    color: white">Login <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="nav-item " style="float: right">
+            <a class="nav-link" href="{{path('register')}}" style="    color: white"> Register <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i></a>
+          </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{path('articlecreate')}}"style="    color: white">Create a article <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            </a>
+          </li>
+          
+        <li class="nav-item ">
+            <a class="nav-link" href="{{path('article')}}"style="    color: white">Explore articles <i class="fa fa-eye" aria-hidden="true"></i>
+            </a>
+          </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="{{path('secure_logout')}}"style="    color: white">Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </span> </a>
+          </li>
+          <li class="nav-item ">
+              <a class="nav-link" href="{{path('profil_controler')}}"style="    color: white">Profile <i class="fa fa-user" aria-hidden="true"></i>
+
+              </span> </a>
+            </li>
+        {% endif %}
+    </ul>
+
+  
+  </div>
+</nav>
+<div class="jumbotron" style="background-image: url({{asset('images/b.jpg') }}); background-repeat:no-repeat; text-align: center ;height: 600px;"  >
+    <br>
+    <br>
+    <br>
+     <h1 class="display-3" style="    color:white;">Hello, world! Welcom to my blog </h1>
+    <p class="lead"  style="    color:white;">This is a simple blog web application using symfony .</p>
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button " style="background-color: #6a4592;
+      border-color: #6a4592;">Learn more  <i class="fa fa-spinner fa-spin  fa-lg fa-fw"></i></a>
+ 
+
+    </p>
+  </div>
+  <section class="py-5 text-center" >
+      <div class="container"> 
+        <h2 class="text-center">MyBlogs`s Services</h2>
+        <p class="text-muted mb-5 text-center">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
+        <div class="row">
+          <div class="col-sm-6 col-lg-4 mb-3">
+              <span class="lnr lnr-diamond"></span>
+            <h6>Ex cupidatat eu</h6>
+            <p class="text-muted">Ex cupidatat eu officia consequat incididunt labore occaecat ut veniam labore et cillum id et.</p>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-3">
+            <span class="lnr lnr-users"></span>
+            <h6>Tempor aute occaecat</h6>
+            <p class="text-muted">Tempor aute occaecat pariatur esse aute amet.</p>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-3">
+            <span class="lnr lnr-flag"></span>
+            <h6>Voluptate ex irure</h6>
+            <p class="text-muted">Voluptate ex irure ipsum ipsum ullamco ipsum reprehenderit non ut mollit commodo.</p>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-3">
+            <span class="lnr lnr-envelope"></span>
+            <h6>Tempor commodo</h6>
+            <p class="text-muted">Tempor commodo nostrud ex Lorem occaecat duis occaecat minim.</p>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-3">
+            <span class="lnr lnr-hand"></span>
+            <h6>Et fugiat sint occaecat</h6>
+            <p class="text-muted">Et fugiat sint occaecat voluptate incididunt anim nostrud ea cillum cillum consequat.</p>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-3">
+            <span class="lnr lnr-home"></span>
+            <h6>Et labore tempor et</h6>
+            <p class="text-muted">Et labore tempor et adipisicing dolor.</p>
+          </div>
+        </div>
+      </div>
+</section>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
-</html>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/e9e469c616.js"></script>
+
+    </html>

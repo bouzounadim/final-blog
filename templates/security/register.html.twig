@@ -1,0 +1,39 @@
+{% extends 'mybase.html.twig' %}
+
+{% block body %}
+
+
+<div class="container-fluid"  >
+
+  <div class="row justify-content-md-center"  style="background-image: url({{asset('images/b.jpg') }}); background-repeat:no-repeat ;height: 600px;">
+    <div class="col-md-auto" style="    margin-top: 40px;
+      margin-top: 40px;
+      border: solid 1px;
+    border-radius: 13px;
+    padding: 36px;
+    border-block-start: none;
+    border-color: #ffffff;
+    color: #fffefc;">
+     <h1 style="text-align: center;
+     margin-bottom: 38px">Register <i class="fa fa-cog fa-spin fa-lg fa-fw"></i></h1>
+          {{ form_start(form) }}
+          {{form_row(form.email,{'attr':{'placeholder':"Email"}})}}
+          {{form_row(form.username,{'attr':{'placeholder':"username"}})}}
+          {{form_row(form.password,{'attr':{'placeholder':"password"}})}}
+          {{form_row(form.confirmpassorwd,{'attr':{'placeholder':"confirm password"}})}}
+          <div class="row justify-content-md-center">
+            <button type="submit" class="btn btn-success" style="background-color: #007bff;
+            border-color: #007bff">
+Register                         </button>
+             </div>
+
+           
+            
+           {{ form_end(form) }}
+
+          </div>
+          </div>
+        </div>
+    
+
+{% endblock %}

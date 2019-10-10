@@ -1,7 +1,15 @@
 security:
+    encoders:
+        App\Entity\User:
+             algorithm: bcrypt
+        #endoage de mot de passe grace au algo bcrypte 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: null }
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,6 +17,14 @@ security:
         main:
             anonymous: true
 
+            provider : in_database
+
+            form_login:
+                login_path: secure_login
+                check_path: secure_login
+            logout:
+                path: secure_logout
+                target: home
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 

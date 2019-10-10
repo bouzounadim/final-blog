@@ -1,0 +1,81 @@
+{% extends 'mybase.html.twig' %}
+{% block title %}{% endblock %}
+{% block body %}
+<style>
+  .btn-danger {
+    float: right;
+      color: #fff;
+      background-color: #6a4592;
+      border-color: #6a4592;}
+  </style>
+<div class="container-fluid" style="margin-top: 30px">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+               
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                        <form class="form-inline">
+                                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Filter by catygory </label>
+                                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                  <option selected>Choose...</option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                                </form>
+                   </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search by text</button>
+                  </form>
+                </div>
+              </nav>
+           
+              <div class="container-fluid" style="background-image: url({{asset('images/.jpg') }})" >
+                <div class="container-fluid"> 
+                <div class="row justify-content-md-center">
+                {% for  article in articles %}
+                          <div class="col-sm-4 ">
+                                <div class="card text-white bg-primary mb-3">
+                                    <h4 class="card-header " style="text-align: center"> Tilte : {{article.title}} <i class="fa fa-free-code-camp" aria-hidden="true"></i>
+                                    </h4>
+                                       <div class="card-body " style="background-color: #e9ecef">
+                              <h5 class="card-title" style="color: #6a4592;">Category :{{article.category.title}}</h5>
+                       <h6 class="card-subtitle text-muted">Craeted at : {{article.createdAt | date ('d/m/y') }} on {{article.createdAt | date ('H:i') }}  by 
+                                {% if app.user and app.user.username == article.user.username %}
+                
+                                    you 
+                                {% else %}
+                                      {{article.user.username}}
+                                       {% endif %}
+                
+                              </h6>
+                              
+                                        </div>
+                            <img style="height: 200px; width: 100%; display: block;"  src="{{article.image}}" alt="Card image">
+                            
+                              <div class="card-body" style="    height: 233px;
+                              ">
+                              <p class="card-text"> Content : <p style="    font-size: 11px;">{{article.content}}</p>
+                                 {% if app.user %}
+                                <a class="btn btn-danger"  href="{{path('articleval',{'id':article.id})}}" role="button" style="">
+                                    Explore
+                                  </a>
+                                  {% else %}
+                                      
+                                    <button class="btn btn-danger" style="pointer-events: none;" type="button" style=""disabled >Explore <i class="fa fa-eye" aria-hidden="true"></i></button>
+            
+                                    {% endif %}
+                              </p>
+                              </div>
+                        </div>
+                        </div>
+                     
+                {% endfor %}
+                  </div>
+                     </div>
+                  </div>
+                       
+        </div>
+      </div>
+  
+{% endblock %}

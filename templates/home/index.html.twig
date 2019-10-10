@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<style>
+.btn-danger.disabled, .btn-danger:disabled {
+  float: right;
+    color: #fff;
+    background-color: #6a4592;
+    border-color: #6a4592;}
+    .btn-danger {
+    float: right;
+      color: #fff;
+      background-color: #6a4592;
+      border-color: #6a4592;}
+  </style>
+</style>
+  <div class="container-fluid" style="background-image: url({{asset('images/.jpg') }})" >
+    <div class="container-fluid"><h3 style="text-align: center ;     font-size: 47px; margin-bottom: 37px;">Recent Posts  <i class="fa fa-superpowers" aria-hidden="true"></i>
+    </h4>  </div>
+    <div class="row justify-content-md-center">
+    {% for  article in articles %}
+              <div class="col-sm-4 ">
+                    <div class="card text-white bg-primary mb-3">
+                        <h6 class="card-header " style="text-align: center"> Tilte : {{article.title}} <i class="fa fa-free-code-camp" aria-hidden="true"></i>
+                        </h6>
+                           <div class="card-body " style="background-color: #e9ecef">
+                  <h5 class="card-title" style="color: #6a4592;">Category :{{article.category.title}}</h5>
+           <h6 class="card-subtitle text-muted">Craeted at : {{article.createdAt | date ('d/m/y') }} on {{article.createdAt | date ('H:i') }}  by 
+                    {% if app.user and app.user.username == article.user.username %}
+    
+                        you 
+                    {% else %}
+                          {{article.user.username}}
+                           {% endif %}
+    
+                  </h6>
+                  
+                            </div>
+                <img style="height: 200px; width: 100%; display: block;"  src="{{article.image}}" alt="Card image">
+                
+                  <div class="card-body" style="    height: 233px;
+                  ">
+                  <p class="card-text"> Content : <p style="    font-size: 11px;">{{article.content}}</p>
+                     {% if app.user %}
+                    <a class="btn btn-danger"  href="{{path('articleval',{'id':article.id})}}" role="button" style="">
+                        Explore
+                      </a>
+                      {% else %}
+                          
+                        <button class="btn btn-danger" style="pointer-events: none;" type="button" style=""disabled >Explore <i class="fa fa-eye" aria-hidden="true"></i></button>
+
+                        {% endif %}
+                  </p>
+                  </div>
+            </div>
+            </div>
+         
+    {% endfor %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+      {{ knp_pagination_render(articles) }}
+      </ul>
+  </nav>
+      </div>
+      
+      </div>
+
+{% endblock %}

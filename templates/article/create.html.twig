@@ -1,0 +1,50 @@
+{% extends 'mybase.html.twig' %}
+{% form_theme articleform 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid"  >
+
+  <div class="row justify-content-md-center"  style="background-image: url({{asset('images/b.jpg') }}); background-repeat:no-repeat ;height: 600px;">
+    <div class="col-md-auto" style="    margin-top: 40px;
+      margin-top: 40px;
+      border: solid 1px;
+    border-radius: 13px;
+    padding: 36px;
+    border-block-start: none;
+    border-color: #ffffff;
+    color: #fffefc;">
+     <h1 style="text-align: center;
+     margin-bottom: 38px">
+     
+     
+     
+     {% if editmod %}
+     Edite Article
+ {% else %}
+ Create  Article 
+{% endif %}
+     
+     
+     <i class="fa fa-cog fa-spin fa-lg fa-fw"></i></h1>
+    {{ form_start(articleform) }}
+    {{form_row(articleform.title,{'attr':{'placeholder':"Titre"}})}}
+    {{form_row(articleform.category)}}
+
+    {{form_row(articleform.content,{'attr':{'placeholder':"Content"}})}}
+    {{form_row(articleform.image,{'attr':{'placeholder':"Image"}})}}
+   
+    <div class="row justify-content-md-center">
+      <button type="submit" class="btn btn-success" style="background-color: #007bff;
+      border-color: #007bff">       
+           {% if editmod %}
+        Editer
+    {% else %}
+    Ajouter article
+   {% endif %}
+  </button>
+  </div>
+    {{ form_end(articleform) }}
+    </div>
+    </div>
+{% endblock %}

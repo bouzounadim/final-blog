@@ -1,0 +1,159 @@
+{% extends 'mybase.html.twig' %}
+{% block title %}Hello ArticleController!{% endblock %}
+{% block body %}
+
+
+<style>
+
+
+
+
+</style>
+<div class="container">
+   
+        <h3 style="margin-top: '3px'">{{article.title}}</h3>
+    
+            <p style="color: #007bff; ">Category : {{article.category.title}}   </p> 
+             
+                <p>  Craeted at : {{article.createdAt | date ('d/m/y') }} on {{article.createdAt | date ('H:i') }}</p>            
+
+    <div class="row">
+
+                <div class="col">
+                                <img src="{{article.image}}" s  alt="">
+                              </div>
+                              <div class="col">
+                                      <br>
+                                      <br>
+                                        <p style="font-weight: 29px     color: #007bff;
+                                        ">Content  <i class="fa fa-align-justify" aria-hidden="true"></i>
+                                                :</p><p>{{article.content}}</p>
+                              </div>
+                            </div>
+         
+       
+        <div class="row">
+</div>
+
+<p style="font-size: 19px;
+margin-top: 9px;"> Comments in total   <i class="fa fa-comments-o" aria-hidden="true"></i>  :  <strong style="    font-size: 29px; color:#007bff; "> {{article.comments | length }}</strong>
+ </p>            
+        {% for comment in article.comments %}
+        
+          
+        <div class="card" style="  width: 1103px;
+        height: 163px;">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="{{comment.user.profil.picture | default('https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y')}}" style="    width: 90px;
+                                    border-radius: 44px;
+                                " class="img img-rounded img-fluid"/>
+                                    <p class="text-secondary text-center" style="    font-size: 13px; margin-right: 35px;">At {{comment.createdAt | date ('H:i') }}</p>
+                                </div>
+                                <div class="col-md-10">
+                                    <p>
+                                      
+                                        <a class="float-left" href="#"><strong> 
+                                             {% if app.user.username==comment.author %}
+                                                 you 
+                                                 {% else %}
+                                                 {{ comment.author }}
+                                        {% endif %}
+                                     
+
+                                        </strong></a>
+
+                                        {% if app.user.username==comment.author %}
+                                        <a class="float-right btn text-white btn-secondary"  style="width: 94px"  href="{{path('commentdelete',{'id':comment.id})}}" style="  
+                                       "> <i class="fa fa-trash"></i> delete</a>
+                                        </a>
+                                        {% else %}
+
+                                        <a class="float-right btn text-white btn-secondary" style=" 
+        width: 94px                          
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+"   > <i class="fa fa-trash"></i> delete</a>
+                                        </a>
+                               {% endif %}
+                            
+        
+                                 
+                                   <div class="clearfix"></div>
+                                    <div style="    width: 714px;"><p style="font-size: 12px;" >{{comment.content}}</p></div>
+                                        
+                                     <a class="float-right btn text-white btn-danger js-like"  href="{{path('comment_like',{'id':comment.id})}}" style="width: 94px;"> 
+                                        {% if app.user and comment.isliked(app.user) %}       
+                                        <i class="fa fa-heart"></i>
+                                        {% else %}
+                                        <i class="fa fa-heart-o"></i>
+                                        {% endif %}
+                                        <span style="float-right" class="js-likes" style="color: #dc3545 ; font-size:12px ;">{{ comment.comlikes | length }}</span>
+                                    </a>                                                                                 </div>
+                            </div>
+                            </div>
+                            {%  endfor %}
+                {% if app.user %}
+                {{ form_start(commform) }}
+                {{form_row(commform.content,{'attr':{'placeholder':"Votre commentaire ici"}})}}
+                <button type="submit" class="btn btn-success sub">
+                        Ajouter votre commentaire
+                     </button>
+               {{form_end(commform)}}
+              </div>
+              {% else %}
+              <h4>You need to be connected to comment</h4>
+              {% endif %}
+</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+
+       function Onclickevent (event) {
+           event.preventDefault();
+           const url=this.href; 
+           const span=this.querySelector('span.js-likes');
+           const icon=this.querySelector('i');
+
+    axios.get(url)
+  .then(function (response) {
+        const likes=response.data.likes;
+        span.textContent=likes;
+        if (icon.classList.contains('fa-heart'))
+                     {
+            icon.classList.replace('fa-heart','fa-heart-o');
+            
+
+                           }
+            else
+             {
+                icon.classList.replace('fa-heart-o','fa-heart');
+                
+
+                         }
+            
+
+        
+
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  });
+       }
+document.querySelectorAll('a.js-like').forEach(function(link){
+    link.addEventListener('click',Onclickevent);
+})
+
+
+</script>
+
+{% endblock %}
